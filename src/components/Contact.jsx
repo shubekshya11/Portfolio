@@ -10,6 +10,7 @@ const Contact = () => {
     message: ''
   })
 
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -19,9 +20,24 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Here you would typically send the form data to your backend
-    console.log('Form submitted:', formData)
-    alert('Thank you for your message! I will get back to you soon.')
+    
+    // Create mailto link with form data
+    const mailtoLink = `mailto:shubekshya22@gmail.com?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Hello Shubekshya,
+
+My name is ${formData.name} and my email is ${formData.email}.
+
+${formData.message}
+
+Best regards,
+${formData.name}`)}`
+    
+    // Open email client
+    window.open(mailtoLink, '_blank')
+    
+    // Show success message
+    alert('Opening your email client... Please send the email manually.')
+    
+    // Reset form
     setFormData({ name: '', email: '', subject: '', message: '' })
   }
 
